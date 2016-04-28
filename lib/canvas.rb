@@ -42,6 +42,6 @@ class Canvas
   end
 
   def too_big?(x,y)
-    (x.to_i.abs > MAX_SIZE || y.to_i > MAX_SIZE)
+    (x.to_i.abs > MAX_SIZE || y.to_i.abs > MAX_SIZE)
   end
 end
