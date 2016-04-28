@@ -1,3 +1,3 @@
-require './lib/bitmap_editor'
+require './app/bitmap_editor'
 
 BitmapEditor.new.run
