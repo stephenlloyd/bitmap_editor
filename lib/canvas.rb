@@ -5,21 +5,21 @@ class Canvas
 
   def initialize(options = {x: DEFAULT_SIZE, y: DEFAULT_SIZE})
     raise "too big" if (options[:x].to_i > MAX_SIZE || options[:y].to_i > MAX_SIZE)
-    rows = ->{Array.new(options.fetch(:x, DEFAULT_SIZE).to_i, DEFAULT_COLOUR)}
-    @board = Array.new(options.fetch(:y, DEFAULT_SIZE).to_i) {rows.call}
+    rows = ->{Array.new(options[:x].to_i, DEFAULT_COLOUR)}
+    @board = Array.new(options[:y].to_i) {rows.call}
   end
 
   def fill(x, y, colour)
     raise "out of boundaries" unless board.dig(x.to_i,y.to_i)
-    board[x.to_i][y.to_i] = colour
+    @board[x.to_i][y.to_i] = colour
   end
 
-  def vertical_line(initial, from, to, colour )
-    fill_all((from..to).map{|axis| [axis, initial]}, colour)
+  def vertical_line(column, from, to, colour )
+    fill_all((from..to).map{|axis| [axis, column]}, colour)
   end
 
-  def horizontal_line(initial, from, to, colour)
-    fill_all((from..to).map{|axis|[initial, axis]}, colour)
+  def horizontal_line(row, from, to, colour)
+    fill_all((from..to).map{|axis|[row, axis]}, colour)
   end
 
   def board
@@ -27,7 +27,7 @@ class Canvas
   end
 
   def show
-    board.each {|row|STDOUT.puts(row.to_s)}
+    board.each{|row|STDOUT.puts(row.to_s)}
   end
 
   def clear
