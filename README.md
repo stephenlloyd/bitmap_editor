@@ -23,9 +23,11 @@ There are 8 supported commands:
 
 In the example below, > represents input
 
+note that the drawing is zero indexed.
+
 ```
 > I 5 6
-> L 2 3 A
+> L 1 2 A
 > S
 OOOOO
 OOOOO
@@ -33,8 +35,8 @@ OAOOO
 OOOOO
 OOOOO
 OOOOO
-> V 2 3 6 W
-> H 3 5 2 Z
+> V 1 2 5 W
+> H 1 4 2 Z
 > S
 OOOOO
 OOZZZ

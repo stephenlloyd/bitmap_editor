@@ -34,12 +34,12 @@ describe Canvas do
   end
 
   it "draws a horizontal line" do
-    subject.horizontal_line( 0,  1,  2, "W")
+    subject.horizontal_line(0,  2,  1, "W")
     expect(subject.board).to eq([["O","W", "W"],["O","O", "O"], ["O","O", "O"]])
   end
 
   it "clears the board" do
-    subject.fill( 0,0,"W")
+    subject.fill(0,0,"W")
     subject.clear
     expect(subject.board).to eq [["O","O", "O"],["O","O", "O"], ["O","O", "O"]]
   end

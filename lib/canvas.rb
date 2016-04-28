@@ -11,16 +11,16 @@ class Canvas
   end
 
   def fill(x, y, colour)
-    raise CanvasError.out_of_boundaries unless board.dig(x.to_i, y.to_i)
-    @board[x.to_i][y.to_i] = colour
+    raise CanvasError.out_of_boundaries unless board[y.to_i][x.to_i]
+    @board[y.to_i][x.to_i] = colour
   end
 
   def vertical_line(column, from, to, colour)
-    fill_all((from..to).map{|axis| [axis, column]}, colour)
+    fill_all((from..to).map{|axis|[column, axis]}, colour)
   end
 
   def horizontal_line(row, from, to, colour)
-    fill_all((from..to).map{|axis|[row, axis]}, colour)
+    fill_all((to..from).map{|axis| [axis, row]}, colour)
   end
 
   def board
