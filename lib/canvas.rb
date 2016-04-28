@@ -15,7 +15,7 @@ class Canvas
     @board[x.to_i][y.to_i] = colour
   end
 
-  def vertical_line(column, from, to, colour )
+  def vertical_line(column, from, to, colour)
     fill_all((from..to).map{|axis| [axis, column]}, colour)
   end
 
