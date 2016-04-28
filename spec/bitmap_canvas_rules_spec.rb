@@ -14,7 +14,7 @@ describe BitmapCanvasRules do
       subject.process("C")
   end
 
-  context "when a boad is created" do
+  context "when a board is created" do
 
     before{subject.process("I 5 5")}
 

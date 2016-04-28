@@ -15,7 +15,11 @@ class BitmapEditor
         when 'X'
           exit_console
         else
+          begin
            bitmap_cavas_rules.process(input)
+          rescue CanvasError => e
+           STDOUT.puts("#{e.class} : #{e.message}")
+          end
       end
     end
   end

@@ -1,16 +1,18 @@
+require './lib/canvas_error'
+
 class Canvas
   MAX_SIZE = 250
   DEFAULT_COLOUR = 'O'
   DEFAULT_SIZE = 1
 
   def initialize(options = {x: DEFAULT_SIZE, y: DEFAULT_SIZE})
-    raise "too big" if (options[:x].to_i > MAX_SIZE || options[:y].to_i > MAX_SIZE)
+    raise CanvasError.too_big if (options[:x].to_i.abs > MAX_SIZE || options[:y].to_i.abs > MAX_SIZE)
     rows = ->{Array.new(options[:x].to_i, DEFAULT_COLOUR)}
     @board = Array.new(options[:y].to_i) {rows.call}
   end
 
   def fill(x, y, colour)
-    raise "out of boundaries" unless board.dig(x.to_i,y.to_i)
+   raise CanvasError.out_of_boundaries unless board.dig(x.to_i, y.to_i)
     @board[x.to_i][y.to_i] = colour
   end
 

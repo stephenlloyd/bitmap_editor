@@ -11,7 +11,7 @@ class BitmapCanvasRules
     create_canvas(x: $1, y: $2) if command.match(/I (\d+) (\d+)/)
     STDOUT.puts("You must create a canvas first, try \"I 5 5\"") unless canvas
     method, *arguments = command.split(" ")
-    canvas.send(METHODS[method], *arguments) unless method == "I" || !canvas
+    canvas.send(METHODS[method], *arguments) unless method.eql?("I") || !canvas
   end
 
   private
