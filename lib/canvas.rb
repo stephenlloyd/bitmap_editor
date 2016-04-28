@@ -11,7 +11,7 @@ class Canvas
   end
 
   def fill(x, y, colour)
-   raise CanvasError.out_of_boundaries unless board.dig(x.to_i, y.to_i)
+    raise CanvasError.out_of_boundaries unless board.dig(x.to_i, y.to_i)
     @board[x.to_i][y.to_i] = colour
   end
 

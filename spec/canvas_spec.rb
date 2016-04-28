@@ -16,7 +16,7 @@ describe Canvas do
   end
 
   it "can create a negative canvas" do
-    expect(described_class.new({x: 3, y: 3}).board).to eq([["O", "O", "O"], ["O", "O", "O"], ["O", "O", "O"]])
+    expect(described_class.new({x: -3, y: -3}).board).to eq([["O", "O", "O"], ["O", "O", "O"], ["O", "O", "O"]])
 
   end
 
