@@ -19,8 +19,8 @@ class Canvas
     fill_all((from..to).map{|axis|[column, axis]}, colour)
   end
 
-  def horizontal_line(row, from, to, colour)
-    fill_all((to..from).map{|axis| [axis, row]}, colour)
+  def horizontal_line(from, to, row, colour)
+    fill_all((from..to).map{|axis| [axis, row]}, colour)
   end
 
   def board

@@ -36,7 +36,7 @@ OOOOO
 OOOOO
 OOOOO
 > V 1 2 5 W
-> H 1 4 2 Z
+> H 2 4 1 Z
 > S
 OOOOO
 OOZZZ
