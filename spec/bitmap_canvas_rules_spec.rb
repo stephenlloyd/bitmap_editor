@@ -15,7 +15,6 @@ describe BitmapCanvasRules do
   end
 
   context "when a board is created" do
-
     before{subject.process("I 5 5")}
 
     it ("can clear") do

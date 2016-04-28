@@ -1,7 +1,6 @@
 require 'canvas'
 
 describe Canvas do
-
   let(:subject){described_class.new({x: 3, y: 3})}
 
   it "creates a blank canvas with default colour" do
@@ -12,13 +11,13 @@ describe Canvas do
     expect{described_class.new({x: Canvas::MAX_SIZE + 1, y: 1})}.to raise_error(CanvasError, "Too Big: The Canvas can only be a maximum of 250 by 250")
   end
 
+  it "can't create a grid outside of its max size for y axis" do
+    expect{described_class.new({y: Canvas::MAX_SIZE + 1, x: 1})}.to raise_error(CanvasError, "Too Big: The Canvas can only be a maximum of 250 by 250")
+  end
+
   it "can create a negative canvas" do
     expect(described_class.new({x: 3, y: 3}).board).to eq([["O", "O", "O"], ["O", "O", "O"], ["O", "O", "O"]])
 
-  end
-
-  it "can't create a grid outside of its max size for x axis" do
-    expect{described_class.new({y: Canvas::MAX_SIZE + 1, x: 1})}.to raise_error(CanvasError, "Too Big: The Canvas can only be a maximum of 250 by 250")
   end
 
   it "fills a square within the boundaries " do
@@ -50,5 +49,4 @@ describe Canvas do
     expect(STDOUT).to receive(:puts).with("[\"O\", \"O\", \"O\"]").exactly(3).times
     subject.show
   end
-
 end

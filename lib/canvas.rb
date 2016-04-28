@@ -1,5 +1,4 @@
 require './lib/canvas_error'
-
 class Canvas
   MAX_SIZE = 250
   DEFAULT_COLOUR = 'O'
