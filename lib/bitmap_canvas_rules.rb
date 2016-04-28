@@ -1,6 +1,8 @@
 require './lib/canvas'
 class BitmapCanvasRules
-  METHODS = {"C" => :clear, "L" => :fill, "V" => :vertical_line, "H" => :horizontal_line, "S" => :show}
+  METHODS = {"C" => :clear, "L" => :fill, "V" => :vertical_line,
+            "H" => :horizontal_line, "S" => :show}
+
   attr_reader :canvas
 
   def initialize(options = {})
@@ -15,7 +17,6 @@ class BitmapCanvasRules
   end
 
   private
-
   def create_canvas(x:, y:)
     @canvas = @canvas_klass.new({x: x, y: y})
   end
