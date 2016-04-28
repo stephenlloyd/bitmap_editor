@@ -16,8 +16,8 @@ class BitmapEditor
           exit_console
         else
           begin
-           bitmap_cavas_rules.process(input)
-         rescue CanvasError, ArgumentError => e
+            bitmap_cavas_rules.process(input)
+          rescue CanvasError, ArgumentError => e
            STDOUT.puts("#{e.class} : #{e.message}")
            show_help if e.is_a?(ArgumentError)
           end
