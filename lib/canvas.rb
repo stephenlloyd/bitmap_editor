@@ -7,8 +7,8 @@ class Canvas
 
   def initialize(options = {x: DEFAULT_SIZE, y: DEFAULT_SIZE})
     raise CanvasError.too_big if too_big?(options[:x], options[:y])
-    rows = ->{Array.new(options[:x].to_i, DEFAULT_COLOUR)}
-    @board = Array.new(options[:y].to_i) {rows.call}
+    rows = ->{Array.new(options[:x].to_i.abs, DEFAULT_COLOUR)}
+    @board = Array.new(options[:y].to_i.abs) {rows.call}
   end
 
   def fill(x, y, colour)
@@ -42,6 +42,6 @@ class Canvas
   end
 
   def too_big?(x,y)
-    (x.to_i > MAX_SIZE || y.to_i > MAX_SIZE)
+    (x.to_i.abs > MAX_SIZE || y.to_i > MAX_SIZE)
   end
 end
