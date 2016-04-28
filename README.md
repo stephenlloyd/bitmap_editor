@@ -1,9 +1,3 @@
-# Technical Test Ruby developer
-
-Produce a Ruby 2.3 program that simulates a basic interactive bitmap editor.
-Bitmaps are represented as an M x N matrix of pixels with each element
-representing a colour.
-
 # Program input
 
 The input consists of a string containing a sequence of commands, where
@@ -51,11 +45,3 @@ OWOOO
 ```
 
 When implementing this program focus on quality and best practices. DO NOT RUSH! It's not a speed test. Make sure the program works with odd input and doesn't crash.
-
-# Submission
-
-We've created a very basic skeleton application you can use as a basis to start from. Feel free to adapt and refactor it as you see fit.
-
-The skeleton can be found here: https://github.com/carwow/bitmap_editor
-
-Please submit a fully completed answer within the time allowed. Please provide source code and full GIT repository. Please commit often and with good commit messages. That will allow us to see how you've approached the problem. Don't worry about changing things around often
