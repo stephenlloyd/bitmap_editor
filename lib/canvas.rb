@@ -14,12 +14,12 @@ class Canvas
     board[x.to_i][y.to_i] = colour
   end
 
-  def vertical_line(initial, start, stop, colour )
-    (start..stop).each{|axis| fill(axis, initial, colour)}
+  def vertical_line(initial, from, to, colour )
+    fill_all((from..to).map{|axis| [axis, initial]}, colour)
   end
 
-  def horizontal_line(initial, start, stop, colour)
-    (start..stop).each{|axis| fill(initial, axis, colour)}
+  def horizontal_line(initial, from, to, colour)
+    fill_all((from..to).map{|axis|[initial, axis]}, colour)
   end
 
   def board
@@ -32,5 +32,10 @@ class Canvas
 
   def clear
     @board.each{|row|row.map!{|pixel| pixel = DEFAULT_COLOUR}}
+  end
+
+  private
+  def fill_all(pixels, colour)
+    pixels.each{|pixel| fill(*pixel, colour)}
   end
 end
