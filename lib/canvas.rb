@@ -39,6 +39,8 @@ class Canvas
     fill_all(all_area([x.to_i,y.to_i]), colour)
   end
 
+  private
+
   def surrounding_squares(coords)
     coords.map{|i| [i - 1, i , i + 1 ]}.flatten.combination(2).to_a.uniq
   end
