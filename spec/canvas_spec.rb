@@ -67,13 +67,13 @@ describe Canvas do
   end
 
   it "will fill all with white" do
-    subject.fill_area([0, 0], "w")
+    subject.fill_area(0, 0, "w")
     expect(subject.board).to eq  [["w","w", "w"],["w","w", "w"], ["w","w","w"]]
   end
 
   it "will fill all with white apart from the black one" do
     subject.fill(0,0, "b")
-    subject.fill_area([0, 1], "w")
+    subject.fill_area(0, 1, "w")
     expect(subject.board).to eq  [["b","w", "w"],["w","w", "w"], ["w","w","w"]]
   end
 
@@ -81,7 +81,7 @@ describe Canvas do
     subject.fill(1,0, "b")
     subject.fill(1,1, "b")
     subject.fill(1,2, "b")
-    subject.fill_area([0, 0], "w")
+    subject.fill_area(0, 0, "w")
     expect(subject.board).to eq  [["w","w","w"],["b","b","b"], ["O","O","O"]]
   end
 

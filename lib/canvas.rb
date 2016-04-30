@@ -11,7 +11,7 @@ class Canvas
   end
 
   def fill(x, y, colour)
-    raise CanvasError.out_of_boundaries unless board.dig(x,y)
+    raise CanvasError.out_of_boundaries unless board.dig(x.to_i,y.to_i)
     @board[x.to_i][y.to_i] = colour
   end
 
@@ -35,8 +35,8 @@ class Canvas
     board.each{|row|row.map!{|pixel| pixel = DEFAULT_COLOUR}}
   end
 
-  def fill_area(coords, colour)
-    fill_all(all_area(coords), colour)
+  def fill_area(x, y, colour)
+    fill_all(all_area([x.to_i,y.to_i]), colour)
   end
 
   def surrounding_squares(coords)

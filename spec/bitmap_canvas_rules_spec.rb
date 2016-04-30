@@ -37,6 +37,11 @@ describe BitmapCanvasRules do
       subject.process("H O 1 2 W")
     end
 
+    it("Fill a area") do
+      expect(canvas).to receive(:fill_area).with("0", "0", "W")
+      subject.process("F 0 0 W")
+    end
+
     it("Show the canvas") do
       expect(canvas).to receive(:show).with no_args
       subject.process("S")
