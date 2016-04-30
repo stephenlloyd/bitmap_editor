@@ -62,6 +62,11 @@ describe Canvas do
     expect(subject.surrounding_same_colour_squares_on_board([0,1])).to eq [[0, 1], [0, 2], [1, 0], [1, 1], [1, 2]]
   end
 
+  it "can get all squares in an area" do
+    expect(subject.all_area([0, 0])).to eq [[0, 1], [0, 0], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2]]
+
+  end
+
   it "knows the colour of a pixel" do
     expect(subject.colour([0,0])).to eq "O"
   end

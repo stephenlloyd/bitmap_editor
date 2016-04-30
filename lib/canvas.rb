@@ -47,6 +47,12 @@ class Canvas
     surrounding_squares_on_board(coords).select{|c| colour(c) == colour(coords)}
   end
 
+  def all_area(coords)
+    all_coords = normalize_coords(coords).map{|c| surrounding_same_colour_squares_on_board(c)}
+    return coords if coords == normalize_coords(all_coords)
+    all_area(normalize_coords(all_coords))
+  end
+
   def colour(coords)
     board.dig(*coords)
   end
@@ -58,5 +64,9 @@ class Canvas
 
   def too_big?(x,y)
     (x.to_i.abs > MAX_SIZE || y.to_i.abs > MAX_SIZE)
+  end
+
+  def normalize_coords(coords)
+    coords.flatten.each_slice(2).to_a.uniq
   end
 end
