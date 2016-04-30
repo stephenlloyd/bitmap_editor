@@ -11,16 +11,16 @@ class Canvas
   end
 
   def fill(x, y, colour)
-    raise CanvasError.out_of_boundaries unless board[y.to_i][x.to_i]
-    @board[y.to_i][x.to_i] = colour
+    raise CanvasError.out_of_boundaries unless board.dig(x,y)
+    @board[x.to_i][y.to_i] = colour
   end
 
   def vertical_line(column, from, to, colour)
-    fill_all((from..to).map{|axis|[column, axis]}, colour)
+    fill_all((from..to).map{|axis|[axis, column]}, colour)
   end
 
   def horizontal_line(from, to, row, colour)
-    fill_all((from..to).map{|axis| [axis, row]}, colour)
+    fill_all((from..to).map{|axis| [row, axis]}, colour)
   end
 
   def board
@@ -35,16 +35,20 @@ class Canvas
     @board.each{|row|row.map!{|pixel| pixel = DEFAULT_COLOUR}}
   end
 
+  def fill_area(coords, colour)
+    fill_all(all_area(coords), colour)
+  end
+
   def surrounding_squares(coords)
     coords.map{|i| [i - 1, i , i + 1 ]}.flatten.combination(2).to_a.uniq
   end
 
   def surrounding_squares_on_board(coords)
-    surrounding_squares(coords).reject{|coord|coord.any?(&:negative?)}
+    surrounding_squares(coords).reject{|coord|coord.any?(&:negative?)}.reject{|coord|coord.any?{|a|a >= board.size}}
   end
 
   def surrounding_same_colour_squares_on_board(coords)
-    surrounding_squares_on_board(coords).select{|c| colour(c) == colour(coords)}
+    surrounding_squares_on_board(coords).select{|c|  colour(c) == colour(coords)}
   end
 
   def all_area(coords)
