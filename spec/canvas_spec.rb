@@ -61,11 +61,15 @@ describe Canvas do
   end
 
   it "will only fill the top line" do
-    subject.fill(1,0, "b")
-    subject.fill(1,1, "b")
-    subject.fill(1,2, "b")
+    subject.horizontal_line(0, 2, 1, "b")
     subject.fill_area(0, 0, "w")
     expect(subject.board).to eq  [["w","w","w"],["b","b","b"], ["O","O","O"]]
+  end
+
+  it "will only fill the right section" do
+    subject.vertical_line(1, 0, 2, "b")
+    subject.fill_area(2, 2, "w")
+    expect(subject.board).to eq  [["O","b","w"],["O","b","w"], ["O","b","w"]]
   end
 
 end
