@@ -40,7 +40,7 @@ class Canvas
   end
 
   def surrounding_squares_on_board(coords)
-    surrounding_squares(coords).reject{|a|a.any?{|n| n < 0}}
+    surrounding_squares(coords).reject{|coord|coord.any?(&:negative?)}
   end
 
   def surrounding_same_colour_squares_on_board(coords)
