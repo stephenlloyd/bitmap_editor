@@ -48,4 +48,21 @@ describe Canvas do
     expect(STDOUT).to receive(:puts).with("[\"O\", \"O\", \"O\"]").exactly(3).times
     subject.show
   end
+
+  it "can get the surrounding squares" do
+    expect(subject.surrounding_squares([1,1])).to eq([[0, 1], [0, 2], [0, 0], [1, 2], [1, 0], [1, 1], [2, 0], [2, 1], [2, 2]])
+  end
+
+  it "can get surrouding squares when off the board" do
+    expect(subject.surrounding_squares_on_board([0,0])).to eq [[0, 1], [0, 0], [1, 0], [1, 1]]
+  end
+
+  it "can only get surrounding squares of the same colour" do
+    subject.fill(0,0, "w")
+    expect(subject.surrounding_same_colour_squares_on_board([0,1])).to eq [[0, 1], [0, 2], [1, 0], [1, 1], [1, 2]]
+  end
+
+  it "knows the colour of a pixel" do
+    expect(subject.colour([0,0])).to eq "O"
+  end
 end

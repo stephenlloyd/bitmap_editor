@@ -35,6 +35,22 @@ class Canvas
     @board.each{|row|row.map!{|pixel| pixel = DEFAULT_COLOUR}}
   end
 
+  def surrounding_squares(coords)
+    coords.map{|i| [i - 1, i , i + 1 ]}.flatten.combination(2).to_a.uniq
+  end
+
+  def surrounding_squares_on_board(coords)
+    surrounding_squares(coords).reject{|a|a.any?{|n| n < 0}}
+  end
+
+  def surrounding_same_colour_squares_on_board(coords)
+    surrounding_squares_on_board(coords).select{|c| colour(c) == colour(coords)}
+  end
+
+  def colour(coords)
+    board.dig(*coords)
+  end
+
   private
   def fill_all(pixels, colour)
     pixels.each{|pixel| fill(*pixel, colour)}
