@@ -32,7 +32,7 @@ class Canvas
   end
 
   def clear
-    @board.each{|row|row.map!{|pixel| pixel = DEFAULT_COLOUR}}
+    board.each{|row|row.map!{|pixel| pixel = DEFAULT_COLOUR}}
   end
 
   def fill_area(coords, colour)
@@ -44,21 +44,37 @@ class Canvas
   end
 
   def surrounding_squares_on_board(coords)
-    surrounding_squares(coords).reject{|coord|coord.any?(&:negative?)}.reject{|coord|coord.any?{|a|a >= board.size}}
+    inside_board_boundaries(surrounding_squares(coords))
   end
 
   def surrounding_same_colour_squares_on_board(coords)
-    surrounding_squares_on_board(coords).select{|c|  colour(c) == colour(coords)}
+    surrounding_squares_on_board(coords).select{|c| colour(c) == colour(coords)}
   end
 
   def all_area(coords)
-    all_coords = normalize_coords(coords).map{|c| surrounding_same_colour_squares_on_board(c)}
+    all_coords = all_surrounding_coords_of_same_colour(normalize_coords(coords))
     return coords if coords == normalize_coords(all_coords)
     all_area(normalize_coords(all_coords))
   end
 
+  def all_surrounding_coords_of_same_colour(coords)
+    coords.map {|c|surrounding_same_colour_squares_on_board(c)}
+  end
+
   def colour(coords)
     board.dig(*coords)
+  end
+
+  def inside_board_boundaries(coords)
+    coords.reject(&negative_indexes).reject(&bigger_than_the_board)
+  end
+
+  def negative_indexes
+    -> (x){x.any?(&:negative?)}
+  end
+
+  def bigger_than_the_board
+    -> (x){x.any?{|a|a >= board.size}}
   end
 
   private
