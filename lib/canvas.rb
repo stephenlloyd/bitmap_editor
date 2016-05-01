@@ -79,7 +79,6 @@ class Canvas
     -> (x){x.any?{|a|a >= board.size}}
   end
 
-  private
   def fill_all(pixels, colour)
     pixels.each{|pixel| fill(*pixel, colour)}
   end
