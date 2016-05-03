@@ -11,7 +11,7 @@ class Canvas
   end
 
   def fill(x, y, colour)
-    raise CanvasError.out_of_boundaries if not_on_board?([y.to_i, x.to_i])
+    raise CanvasError.out_of_boundaries if not_on_board?([x.to_i, y.to_i])
     @board[y.to_i][x.to_i] = colour
   end
 
@@ -72,17 +72,16 @@ class Canvas
     board.dig(*coords.reverse)
   end
 
-
   def negative_indexes
     -> (x){x.any?(&:negative?)}
   end
 
   def bigger_than_the_board
-    -> (x){not_on_board?(x.reverse)}
+    -> (x){not_on_board?(x)}
   end
 
   def not_on_board?(coord)
-    board.dig(*coord).nil?
+    board.dig(*coord.reverse).nil?
   end
 
   def fill_all(pixels, colour)
