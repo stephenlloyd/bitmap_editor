@@ -43,10 +43,7 @@ class Canvas
 
   def surrounding_squares(coords)
     bounds = coords.map{|i| [i - 1, i , i + 1 ]}
-    all_surrounding = bounds.first.map do |i|
-      [ [i, bounds.last[0]], [i, bounds.last[1]],  [i, bounds.last[2]]]
-    end
-    normalize_coords(all_surrounding)
+    normalize_coords(bounds.first.map{|i| bounds.last.map{|l_i|[i, l_i]}})
   end
 
   def all_area(coords)
