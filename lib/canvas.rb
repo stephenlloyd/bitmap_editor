@@ -11,16 +11,16 @@ class Canvas
   end
 
   def fill(x, y, colour)
-    raise CanvasError.out_of_boundaries unless board.dig(x.to_i,y.to_i)
-    @board[x.to_i][y.to_i] = colour
+    raise CanvasError.out_of_boundaries if not_on_board?([y.to_i, x.to_i])
+    @board[y.to_i][x.to_i] = colour
   end
 
   def vertical_line(column, from, to, colour)
-    fill_all((from..to).map{|axis|[axis, column]}, colour)
+    fill_all((from..to).map{|axis|[column, axis]}, colour)
   end
 
   def horizontal_line(from, to, row, colour)
-    fill_all((from..to).map{|axis| [row, axis]}, colour)
+    fill_all((from..to).map{|axis| [axis, row]}, colour)
   end
 
   def board
@@ -36,21 +36,17 @@ class Canvas
   end
 
   def fill_area(x, y, colour)
-    fill_all(all_area([x.to_i,y.to_i]), colour)
+    fill_all(all_area([x.to_i, y.to_i]), colour)
   end
 
   private
 
   def surrounding_squares(coords)
-    coords.map{|i| [i - 1, i , i + 1 ]}.flatten.combination(2).to_a.uniq
-  end
-
-  def surrounding_squares_on_board(coords)
-    inside_board_boundaries(surrounding_squares(coords))
-  end
-
-  def surrounding_same_colour_squares_on_board(coords)
-    surrounding_squares_on_board(coords).select{|c| colour(c) == colour(coords)}
+    bounds = coords.map{|i| [i - 1, i , i + 1 ]}
+    all_surrounding = bounds.first.map do |i|
+      [ [i, bounds.last[0]], [i, bounds.last[1]],  [i, bounds.last[2]]]
+    end
+    normalize_coords(all_surrounding)
   end
 
   def all_area(coords)
@@ -60,23 +56,36 @@ class Canvas
   end
 
   def all_surrounding_coords_of_same_colour(coords)
-    coords.map {|c|surrounding_same_colour_squares_on_board(c)}
+    coords.map{|c|surrounding_same_colour_squares_on_board(c)}
   end
 
-  def colour(coords)
-    board.dig(*coords)
+  def surrounding_same_colour_squares_on_board(coords)
+    surrounding_squares_on_board(coords).select {|c|colour(c) ==  colour(coords)}
+  end
+
+  def surrounding_squares_on_board(coords)
+    inside_board_boundaries(surrounding_squares(coords))
   end
 
   def inside_board_boundaries(coords)
     coords.reject(&negative_indexes).reject(&bigger_than_the_board)
   end
 
+  def colour(coords)
+    board.dig(*coords.reverse)
+  end
+
+
   def negative_indexes
     -> (x){x.any?(&:negative?)}
   end
 
   def bigger_than_the_board
-    -> (x){x.any?{|a|a > board.size}}
+    -> (x){not_on_board?(x.reverse)}
+  end
+
+  def not_on_board?(coord)
+    board.dig(*coord).nil?
   end
 
   def fill_all(pixels, colour)
