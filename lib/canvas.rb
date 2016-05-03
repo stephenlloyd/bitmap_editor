@@ -76,7 +76,7 @@ class Canvas
   end
 
   def bigger_than_the_board
-    -> (x){x.any?{|a|a >= board.size}}
+    -> (x){x.any?{|a|a > board.size}}
   end
 
   def fill_all(pixels, colour)

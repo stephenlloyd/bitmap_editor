@@ -1,7 +1,7 @@
 require 'canvas'
 
 describe Canvas do
-  let(:subject){described_class.new({x: 3, y: 3})}
+  let(:subject){described_class.new({x: '3', y: '3'})}
 
   it "creates a blank canvas with default colour" do
     expect(described_class.new.board).to eq [[Canvas::DEFAULT_COLOUR]]
@@ -61,14 +61,14 @@ describe Canvas do
   end
 
   it "will only fill the top line" do
-    subject.horizontal_line(0, 2, 1, "b")
-    subject.fill_area(0, 0, "w")
+    subject.horizontal_line('0', '2', '1', "b")
+    subject.fill_area('0', '0', "w")
     expect(subject.board).to eq  [["w","w","w"],["b","b","b"], ["O","O","O"]]
   end
 
   it "will only fill the right section" do
-    subject.vertical_line(1, 0, 2, "b")
-    subject.fill_area(2, 2, "w")
+    subject.vertical_line('1', '0', '2', "b")
+    subject.fill_area('2', '2', "w")
     expect(subject.board).to eq  [["O","b","w"],["O","b","w"], ["O","b","w"]]
   end
 
