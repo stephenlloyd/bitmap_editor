@@ -74,4 +74,21 @@ describe Canvas do
     expect(subject.board).to eq  [["O","b","w","w"],["O","b","w","w"],["O","b","w","w"]]
   end
 
+  # * R X1 X2 Y1 Y2 C - Draw a rectangle within boundaries.
+  it "can create a rectangle" do
+    subject.draw_rectangle(1, 3, 0, 2, "w")
+    expect(subject.board).to eq ([["O","w", "w", "w"],
+                                  ["O","w", "O", "w"],
+                                  ["O","w", "w", "w"]])
+  end
+
+  # * R X1 X2 Y1 Y2 C - Draw a rectangle within boundaries.
+  it "can create a rectangle regardless of points" do
+    subject.draw_rectangle(3, 1, 2, 0, "w")
+    expect(subject.board).to eq ([["O","w", "w", "w"],
+                                  ["O","w", "O", "w"],
+                                  ["O","w", "w", "w"]])
+  end
+
+
 end

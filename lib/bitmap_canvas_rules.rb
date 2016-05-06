@@ -1,6 +1,6 @@
 require './lib/canvas'
 class BitmapCanvasRules
-  METHODS = {"C" => :clear, "L" => :fill, "V" => :vertical_line,
+  METHODS = {"C" => :clear, "L" => :fill, "V" => :vertical_line, "R" => :draw_rectangle,
             "H" => :horizontal_line, "S" => :show, "F" => :fill_area}
 
   attr_reader :canvas

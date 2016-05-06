@@ -16,11 +16,11 @@ class Canvas
   end
 
   def vertical_line(column, from, to, colour)
-    fill_all((from..to).map{|axis|[column, axis]}, colour)
+    fill_all((ordered_range(from, to)).map{|axis|[column, axis]}, colour)
   end
 
   def horizontal_line(from, to, row, colour)
-    fill_all((from..to).map{|axis| [axis, row]}, colour)
+    fill_all((ordered_range(from, to)).map{|axis| [axis, row]}, colour)
   end
 
   def board
@@ -39,7 +39,18 @@ class Canvas
     fill_all(all_area([x.to_i, y.to_i]), colour)
   end
 
+  def draw_rectangle(x1, x2, y1, y2, c)
+    horizontal_line(x1, x2, y1, c)
+    horizontal_line(x1, x2, y2, c)
+    vertical_line(x1, y1, y2, c)
+    vertical_line(x2, y1, y2, c)
+  end
+
   private
+
+  def ordered_range(a, b)
+    Range.new(*[a,b].sort)
+  end
 
   def surrounding_squares(coords)
     bounds = coords.map{|i| [i - 1, i , i + 1 ]}
